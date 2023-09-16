@@ -66,24 +66,24 @@ export const DELETE = async (request: NextRequest) => {
     return NextResponse.json({message:"Prodcut successfully Deleted"})
   }
 };
-
-
-export const PUT = async(request:NextRequest) => {
+export const PUT = async (request: NextRequest) => {
   const req = await request.json();
-  const id = req.user_id
-try {
-  if (req) {
-    await db.update(cartdata).set({
-      product_quantity:req.product_quantity,
-      product_price:req.product_price
-    }).where(and(eq(cartdata.user_id,id),eq(cartdata.product_title,req.product_title))).returning()
-    return NextResponse.json({Message:"Qunatity updated successfully"},{status:200})
-  } else {
-    throw new Error("Failed to update cart")
+  try {
+    const res = await db
+      .update(cartdata)
+      .set({ product_quantity: req.product_quantity})
+      .where(
+        and(
+          eq(cartdata.user_id, req.user_id),
+          eq(cartdata.product_title, req.product_title)
+        )
+      )
+      .returning();
+    console.log("Quantity Updated");
+    return NextResponse.json({ message: "Quantity Updated" });
+  } catch (error) {
+    console.log("Error while updating quantity", error);
+    return NextResponse.json({ message: "Error while updating quantity" });
   }
-} catch (error) {
-  console.log(error);
-  return NextResponse.json({Message: error},{status:500})
-  
-}
-}
+};
+
