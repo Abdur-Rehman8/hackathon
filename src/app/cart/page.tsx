@@ -1,7 +1,7 @@
 import React from 'react'
-import CartDetails from '../cartDetails'
+import CartDetails from '../components/cartDetails'
 
-export default function () {
+export default function page() {
   return (
     <>
     <CartDetails/>

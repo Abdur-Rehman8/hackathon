@@ -6,7 +6,7 @@ import { BsCart2 } from "react-icons/bs";
 import Quantity from "@/app/components/quantity";
 import Image from "next/image";
 import num from "../../components/quantity"
-import ProductDetails from "@/app/productDetails";
+import ProductDetails from "@/app/components/productDetails";
 
 
 export async function generateStaticParams() {
